@@ -3,10 +3,7 @@ const authService = require("../services/authService");
 
 const router = express.Router();
 
-router.get("/", () => {
-    try {
-        
-    } catch (error) {
-        
-    }
+router.get("/", (req, res) => {
+  try {
+  } catch (error) {}
 });
