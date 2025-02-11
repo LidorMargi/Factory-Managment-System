@@ -1,7 +1,7 @@
 const Employee = require('../models/employeeModel');
 
-const getAllEmployees = (filters) => {
-  return Employee.find(filters).populate(departmentId, name);
+const getAllEmployees = () => {
+  return Employee.find().populate(departmentId, name);
 };
 
 const getEmployeeById = (id) => {

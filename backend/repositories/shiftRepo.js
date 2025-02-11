@@ -1,8 +1,8 @@
 
 const Shift = require('../models/shiftModel');
 
-const getAllShifts = (filters) => {
-  return Shift.find(filters);
+const getAllShifts = () => {
+  return Shift.find();
 };
 
 const getShiftById = (id) => {

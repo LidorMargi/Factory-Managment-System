@@ -3,7 +3,13 @@ const authService = require("../services/authService");
 
 const router = express.Router();
 
-router.get("/", (req, res) => {
+router.post("/login", async (req, res) => {
   try {
-  } catch (error) {}
+    const { username, email } = req.body;
+    res.json(await authService.login(username, email));
+  } catch (error) {
+    res.status(500).json(error);
+  }
 });
+
+module.exports = router;
