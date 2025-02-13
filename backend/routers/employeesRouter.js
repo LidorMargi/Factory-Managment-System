@@ -5,8 +5,9 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    res.json(await employeesService.getAllUsers());
+    res.json(await employeesService.getAllEmployees());
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
   }
 });
@@ -24,13 +25,14 @@ router.post("/", async (req, res) => {
   try {
     res.json(await employeesService.createEmployee(req.body));
   } catch (error) {
+    console.log(error);
     res.status(500).json(error);
   }
 });
 
 router.put("/:id", async (req, res) => {
   try {
-    const {id} = req.params
+    const { id } = req.params;
     res.json(await employeesService.updateEmployee(id, req.body));
   } catch (error) {
     res.status(500).json(error);

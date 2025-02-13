@@ -1,5 +1,6 @@
 const employeeRepo = require("../repositories/employeeRepo");
 const departmentRepo = require("../repositories/departmentRepo");
+const shiftRepo = require("../repositories/shiftRepo");
 
 const getAllEmployees = async () => {
   return await employeeRepo.getAllEmployees();
@@ -12,7 +13,7 @@ const getEmployeeById = async (id) => {
 const createEmployee = async (obj) => {
   const { firstName, lastName, startWorkYear, department } = obj;
   const departmentData = await departmentRepo.getDepartmentByName(department);
-  const newEmployee = await employeeRepo.createEmployee({
+  const newEmployee = await employeeRepo.addEmployee({
     firstName,
     lastName,
     startWorkYear,
@@ -35,7 +36,8 @@ const updateEmployee = async (id, obj) => {
 };
 
 const deleteEmployee = async (id) => {
-    await employeeRepo.deleteEmployee(id);
+  await shiftRepo.removeEmployeeFromShifts(id);
+  return await employeeRepo.deleteEmployee(id);
 };
 
 module.exports = {
