@@ -3,11 +3,20 @@ const departmentRepo = require("../repositories/departmentRepo");
 const shiftRepo = require("../repositories/shiftRepo");
 
 const getAllEmployees = async (filters) => {
-  return await employeeRepo.getAllEmployees(filters);
+  const employees = await employeeRepo.getAllEmployees(filters);
+  const finalEmployees = await Promise.all(
+    employees.map(async (employee) => {
+      const employeeShifts = await shiftRepo.getShiftByEmployeeId(employee._id);
+      return { employee, shifts: employeeShifts };
+    })
+  );
+  return finalEmployees;
 };
 
 const getEmployeeById = async (id) => {
-  return await employeeRepo.getEmployeeById(id);
+  const employee = await employeeRepo.getEmployeeById(id);
+  const employeeShifts = await shiftRepo.getShiftByEmployeeId(id);
+  return { employee, shifts: employeeShifts };
 };
 
 const createEmployee = async (obj) => {
