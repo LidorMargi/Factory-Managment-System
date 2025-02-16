@@ -2,8 +2,8 @@ const employeeRepo = require("../repositories/employeeRepo");
 const departmentRepo = require("../repositories/departmentRepo");
 const shiftRepo = require("../repositories/shiftRepo");
 
-const getAllEmployees = async () => {
-  return await employeeRepo.getAllEmployees();
+const getAllEmployees = async (filters) => {
+  return await employeeRepo.getAllEmployees(filters);
 };
 
 const getEmployeeById = async (id) => {

@@ -5,9 +5,9 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-    res.json(await employeesService.getAllEmployees());
+    const filters = req.query;
+    res.json(await employeesService.getAllEmployees(filters));
   } catch (error) {
-    console.log(error)
     res.status(500).json(error);
   }
 });

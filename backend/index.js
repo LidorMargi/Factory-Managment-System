@@ -16,7 +16,7 @@ app.use(express.json());
 
 app.use("/auth", authRouter);
 app.use("/employees", employeesRouter);
-//app.use("/departments", departmentsRouter);
+app.use("/departments", departmentsRouter);
 //app.use("/shifts", shiftsRouter);
 
 const PORT = process.env.PORT || 3000;

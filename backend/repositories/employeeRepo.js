@@ -1,11 +1,7 @@
-require('../models/employeeModel');
-require("../models/departmentModel");
-
 const Employee = require('../models/employeeModel');
-const Department = require("../models/departmentModel");
 
-const getAllEmployees = () => {
-  return Employee.find().populate("departmentId", "name");
+const getAllEmployees = (filters) => {
+  return Employee.find(filters).populate("departmentId", "name");
 };
 
 const getEmployeeById = (id) => {
