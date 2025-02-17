@@ -22,19 +22,28 @@ const getEmployeeById = async (id) => {
 const createEmployee = async (obj) => {
   const { firstName, lastName, startWorkYear, department } = obj;
   const departmentData = await departmentRepo.getDepartmentByName(department);
-  const newEmployee = await employeeRepo.addEmployee({
-    firstName,
-    lastName,
-    startWorkYear,
-    departmentId: departmentData._id,
-  });
-
-  return newEmployee;
+  if (!departmentData) {
+    throw new Error("There is no " + department + " department!");    
+  } else {
+    const newEmployee = await employeeRepo.addEmployee({
+      firstName,
+      lastName,
+      startWorkYear,
+      departmentId: departmentData._id,
+    });
+    return newEmployee;
+  }
 };
 
 const updateEmployee = async (id, obj) => {
   const { firstName, lastName, startWorkYear, department } = obj;
   const departmentData = await departmentRepo.getDepartmentByName(department);
+  if (departmentData === null) {
+    departmentData = await departmentRepo.addDepartment({
+      department,
+      managerId: id,
+    });
+  }
   const updatedEmployee = {
     firstName,
     lastName,

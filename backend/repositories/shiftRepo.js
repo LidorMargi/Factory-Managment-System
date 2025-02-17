@@ -5,11 +5,11 @@ const getAllShifts = (filters) => {
 };
 
 const getShiftById = (id) => {
-  return Shift.findById(id);
+  return Shift.findById(id).populate("employee");
 };
 
 const getShiftByEmployeeId = (id) => {
-  return Shift.find({ employees: id }).populate("employees");
+  return Shift.find({ employees: id });
 };
 
 const removeEmployeeFromShifts = (id) => {

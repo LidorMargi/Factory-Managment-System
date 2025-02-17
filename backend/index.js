@@ -17,7 +17,7 @@ app.use(express.json());
 app.use("/auth", authRouter);
 app.use("/employees", employeesRouter);
 app.use("/departments", departmentsRouter);
-//app.use("/shifts", shiftsRouter);
+app.use("/shifts", shiftsRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`App is listening on port: ${PORT}`));
