@@ -22,7 +22,23 @@ const getDepartmentById = async (id) => {
   return { department, employees: departmentEmployees };
 };
 
+const createDepartment = async (obj) => {
+  return departmentRepo.addDepartment(obj);
+};
+
+const updateDepartment = async (id, obj) => {
+  return departmentRepo.updateDepartment(id, obj);
+};
+
+const deleteDepartment = async (id) => {
+  await employeeRepo.deleteEmployeesByDepartment(id);
+  return await departmentRepo.deleteDepartment(id);
+};
+
 module.exports = {
   getAllDepartments,
   getDepartmentById,
+  createDepartment,
+  updateDepartment,
+  deleteDepartment,
 };

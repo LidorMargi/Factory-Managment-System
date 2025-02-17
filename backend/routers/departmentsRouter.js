@@ -21,7 +21,7 @@ router.get("/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
-/*
+
 router.post("/", async (req, res) => {
   try {
     res.json(await departmentsService.createDepartment(req.body));
@@ -48,5 +48,5 @@ router.delete("/:id", async (req, res) => {
     res.status(500).json(error);
   }
 });
-*/
+
 module.exports = router;

@@ -21,10 +21,15 @@ const deleteEmployee = (id) => {
   return Employee.findByIdAndDelete(id);
 };
 
+const deleteEmployeesByDepartment = (departmentId) => {
+  return Employee.deleteMany({departmentId})
+}
+
 module.exports = {
   getAllEmployees,
   getEmployeeById,
   addEmployee,
   updateEmployee,
   deleteEmployee,
+  deleteEmployeesByDepartment,
 };
