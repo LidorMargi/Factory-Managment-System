@@ -6,7 +6,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      - MONGO_URI = mongodb://mongo:27017/factoryDB
+      - MONGO_URI = mongodb://host.docker.internal:27017/factoryDB
     depends_on:
       - mongo
 
