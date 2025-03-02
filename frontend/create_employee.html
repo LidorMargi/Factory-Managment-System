@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Create New Employee</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div class="container" style="margin-top: 50px; max-width: 500px">
+      <h2>Create New Employee</h2>
+      <form id="employeeForm">
+        <div class="form-group">
+          <label for="firstName">First Name:</label>
+          <input type="text" class="form-control" id="firstName" required />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name:</label>
+          <input type="text" class="form-control" id="lastName" required />
+        </div>
+        <div class="form-group">
+          <label for="startWorkYear">Start Work Year:</label>
+          <input
+            type="number"
+            class="form-control"
+            id="startWorkYear"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="department">Department:</label>
+          <select class="form-control" id="department" required>
+            <option value="">Select a department</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Create Employee</button>
+        <a href="employees.html" class="btn btn-secondary">Cancel</a>
+      </form>
+    </div>
+
+    <script>
+      const departmentsUrl = "http://localhost:3000/departments";
+      const employeesUrl = "http://localhost:3000/employees";
+
+      async function loadDepartments() {
+        try {
+          const resp = await fetch(departmentsUrl);
+          const departments = await resp.json();
+          const departmentSelect = document.getElementById("department");
+
+          departments.forEach((depObj) => {
+            const dep = depObj.department;
+            const option = document.createElement("option");
+            option.value = dep.name;; 
+            option.textContent = dep.name;
+            departmentSelect.appendChild(option);
+          });
+        } catch (error) {
+          console.error("Error loading departments:", error);
+        }
+      }
+
+      async function createEmployee(event) {
+        event.preventDefault(); // Prevent page reload
+
+        const newEmployee = {
+          firstName: document.getElementById("firstName").value,
+          lastName: document.getElementById("lastName").value,
+          startWorkYear: document.getElementById("startWorkYear").value,
+          department: document.getElementById("department").value,
+        };
+
+        try {
+          const resp = await fetch(employeesUrl, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(newEmployee),
+          });
+
+          if (resp.ok) {
+            alert("Employee created successfully!");
+            window.location.href = "employees.html";
+          } else {
+            alert("Failed to create employee.");
+          }
+        } catch (error) {
+          console.error("Error creating employee:", error);
+        }
+      }
+
+      window.onload = () => {
+        loadDepartments();
+        document
+          .getElementById("employeeForm")
+          .addEventListener("submit", createEmployee);
+      };
+    </script>
+  </body>
+</html>
