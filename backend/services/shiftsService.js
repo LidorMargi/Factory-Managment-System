@@ -16,9 +16,16 @@ const updateShift = (id, obj) => {
   return shiftRepo.updateShift(id, obj);
 };
 
+const addEmployeeToShift = (id, { employeeId }) => {
+  const shift = shiftRepo.getShiftById(id);
+  shift.employees.push(employeeId);
+  return shiftRepo.updateShift(id, shift);
+};
+
 module.exports = {
   getAllShifts,
   getShiftById,
   createShift,
   updateShift,
+  addEmployeeToShift,
 };

@@ -39,4 +39,13 @@ router.put("/:id", async (req, res) => {
   }
 });
 
+router.post("/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    res.json(await shiftsService.addEmployeeToShift(id, req.body));
+  } catch (error) {
+    res.status(500).json(error);
+  }
+});
+
 module.exports = router;

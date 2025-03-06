@@ -1,11 +1,11 @@
 const Shift = require("../models/shiftModel");
 
 const getAllShifts = (filters) => {
-  return Shift.find();
+  return Shift.find(filters);
 };
 
 const getShiftById = (id) => {
-  return Shift.findById(id).populate("employee");
+  return Shift.findById(id);
 };
 
 const getShiftByEmployeeId = (id) => {
