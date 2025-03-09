@@ -31,7 +31,7 @@ const updateDepartment = async (id, obj) => {
 };
 
 const deleteDepartment = async (id) => {
-  await employeeRepo.deleteEmployeesByDepartment(id);
+  await employeeRepo.deleteDepartmentFromEmployees(id);
   return await departmentRepo.deleteDepartment(id);
 };
 

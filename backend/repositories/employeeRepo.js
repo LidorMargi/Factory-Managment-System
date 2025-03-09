@@ -25,6 +25,13 @@ const deleteEmployeesByDepartment = (departmentId) => {
   return Employee.deleteMany({departmentId})
 }
 
+const deleteDepartmentFromEmployees = (departmentId) => {
+  return Employee.updateMany(
+    { departmentId },
+    { $unset: { departmentId: "" } }
+  );
+};
+
 module.exports = {
   getAllEmployees,
   getEmployeeById,
@@ -32,4 +39,5 @@ module.exports = {
   updateEmployee,
   deleteEmployee,
   deleteEmployeesByDepartment,
+  deleteDepartmentFromEmployees,
 };
