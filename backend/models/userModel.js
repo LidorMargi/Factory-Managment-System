@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema(
     name: String,
     username: String,
     email: String,
-    numOfActions: Number,
+    numOfActions: { type: Number, default: 10 },
+    lastActionDate: { type: String, default: new Date().toISOString().split("T")[0] },
   },
   { versionkey: false }
 );

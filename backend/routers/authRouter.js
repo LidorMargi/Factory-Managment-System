@@ -6,11 +6,12 @@ const router = express.Router();
 router.post("/login", async (req, res) => {
   try {
     const { username, email } = req.body;
-    res.json(await authService.login(username, email));
-    console.log("logged in");
+    const {token, name} = await authService.login(username, email)
+    res.json({message: "Login successful", token, name});
+    console.log(`User ${name} logged in`);
   } catch (error) {
-    console.log(error);
-    res.status(500).json(error);
+    console.log("Login Error:", error);
+    res.status(401).json(error);
   }
 });
 
