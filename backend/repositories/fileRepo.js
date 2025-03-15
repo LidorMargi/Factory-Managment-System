@@ -4,14 +4,14 @@ const path = require("path");
 const actionsFilePath = path.join(__dirname, "../data/actions.json");
 
 const readActions = () => {
-  if (!fs.existsSync(actionsFilePath)) {
+  if (!fs.exists(actionsFilePath)) {
     return { actions: [] };
   }
-  return JSON.parse(fs.readFileSync(actionsFilePath, "utf-8"));
+  return JSON.parse(fs.readFile(actionsFilePath, "utf-8"));
 };
 
 const writeActions = (data) => {
-  fs.writeFileSync(actionsFilePath, JSON.stringify(data, null, 2));
+  fs.writeFile(actionsFilePath, JSON.stringify(data, null, 2));
 };
 
 module.exports = { readActions, writeActions };

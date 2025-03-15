@@ -2,7 +2,7 @@ const jwt = require("jsonwebtoken");
 const fileRepo = require('../repositories/fileRepo')
 require("dotenv").config();
 
-const authMiddleware = (req, res, next) => {
+const authMiddleware = async (req, res, next) => {
     const token = req.headers.authorization?.split(" ")[1];
 
     if (!token) {
@@ -14,7 +14,7 @@ const authMiddleware = (req, res, next) => {
         req.user = decoded;
         const userId = req.user.id;
 
-        let data = fileRepo.readActions();
+        let data = await fileRepo.readActions();
         const today = new Date().toLocaleDateString("en-GB");
 
         let userActions = data.actions.filter(action => action.id === userId);
